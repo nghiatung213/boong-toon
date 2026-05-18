@@ -38,7 +38,7 @@ export function renderEmailLayout({
           </tr>
           <tr>
             <td style="padding:0 28px 28px;text-align:center;">
-              <a href="${siteUrl}" style="display:inline-block;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#ff6b81,#a29bfe);color:#fff;font-weight:700;text-decoration:none;font-size:14px;">Mở MirAi</a>
+              <a href="${siteUrl}" style="display:inline-block;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#ff6b81,#a29bfe);color:#fff;font-weight:700;text-decoration:none;font-size:14px;">Mở BoongToon</a>
             </td>
           </tr>
           <tr>
