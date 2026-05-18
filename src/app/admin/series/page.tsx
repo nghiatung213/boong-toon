@@ -3,8 +3,8 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/Button";
 import { listSeriesWithStats } from "@/lib/admin/series-service";
 
-export default function AdminSeriesListPage() {
-  const series = listSeriesWithStats();
+export default async function AdminSeriesListPage() {
+  const series = await listSeriesWithStats();
 
   return (
     <div className="space-y-4">

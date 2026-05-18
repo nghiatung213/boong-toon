@@ -10,43 +10,45 @@ export function isChapterPublished(chapter: Chapter, now = Date.now()): boolean 
   return chapter.timestamp <= now;
 }
 
-export function getAllSeries(): Series[] {
+export async function getAllSeries(): Promise<Series[]> {
   return getAllSeriesFromStore();
 }
 
-export function getSeriesBySlug(slug: string): Series | undefined {
+export async function getSeriesBySlug(slug: string): Promise<Series | undefined> {
   return getSeriesBySlugFromStore(slug);
 }
 
-export function getChaptersForSeries(seriesId: string): Chapter[] {
+export async function getChaptersForSeries(seriesId: string): Promise<Chapter[]> {
   return getChaptersForSeriesId(seriesId);
 }
 
-export function getPublishedChapters(seriesId: string): Chapter[] {
-  return getChaptersForSeries(seriesId).filter(isChapterPublished);
+export async function getPublishedChapters(seriesId: string): Promise<Chapter[]> {
+  const chapters = await getChaptersForSeries(seriesId);
+  return chapters.filter(isChapterPublished);
 }
 
-export function getChapterById(
+export async function getChapterById(
   seriesSlug: string,
   chapterId: string,
-): Chapter | undefined {
-  const series = getSeriesBySlug(seriesSlug);
+): Promise<Chapter | undefined> {
+  const series = await getSeriesBySlug(seriesSlug);
   if (!series) return undefined;
-  return getChaptersForSeries(series.id).find((c) => c.id === chapterId);
+  const chapters = await getChaptersForSeries(series.id);
+  return chapters.find((c) => c.id === chapterId);
 }
 
-export function getAdjacentChapters(
+export async function getAdjacentChapters(
   seriesSlug: string,
   chapterId: string,
-): {
+): Promise<{
   prev: Chapter | null;
   next: Chapter | null;
   current: Chapter | null;
-} {
-  const series = getSeriesBySlug(seriesSlug);
+}> {
+  const series = await getSeriesBySlug(seriesSlug);
   if (!series) return { prev: null, next: null, current: null };
 
-  const published = getPublishedChapters(series.id);
+  const published = await getPublishedChapters(series.id);
   const index = published.findIndex((c) => c.id === chapterId);
   if (index === -1) {
     return { prev: null, next: null, current: null };

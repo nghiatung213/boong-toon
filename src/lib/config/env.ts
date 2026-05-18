@@ -25,6 +25,17 @@ export function isSupabaseConfiguredClient(): boolean {
 }
 
 export function getDataBackend(): DataBackend {
+  const onVercel =
+    process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+
+  if (onVercel) {
+    if (isSupabaseConfigured()) return "supabase";
+    console.error(
+      "[MirAi] Production requires NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY",
+    );
+    return "json";
+  }
+
   if (
     process.env.DATA_BACKEND === "json" ||
     process.env.USE_JSON_DB === "true"

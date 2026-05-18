@@ -18,10 +18,10 @@ export async function GET(request: Request, { params }: RouteParams) {
   if (auth) return auth;
 
   const { id, chapterId } = await params;
-  const record = getChapterRecord(id, chapterId);
+  const record = await getChapterRecord(id, chapterId);
   if (!record) return jsonError("Không tìm thấy chương", 404);
 
-  const content = readChapterContentByFile(record.file) ?? "";
+  const content = (await readChapterContentByFile(record.file)) ?? "";
 
   return jsonOk({ chapter: record, content });
 }
@@ -33,7 +33,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   try {
     const { id, chapterId } = await params;
     const body = (await request.json()) as Partial<ChapterInput>;
-    const chapter = updateChapter(id, chapterId, body);
+    const chapter = await updateChapter(id, chapterId, body);
     return jsonOk({ chapter });
   } catch (e) {
     return jsonError(e instanceof Error ? e.message : "Lỗi cập nhật chương");
@@ -45,7 +45,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
   if (auth) return auth;
 
   const { id, chapterId } = await params;
-  const ok = deleteChapter(id, chapterId);
+  const ok = await deleteChapter(id, chapterId);
   if (!ok) return jsonError("Không tìm thấy chương", 404);
   return jsonOk({ ok: true });
 }

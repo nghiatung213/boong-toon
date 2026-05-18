@@ -16,13 +16,17 @@ export async function handlePurchaseApproval(requestId: string, adminNote?: stri
     href: `/purchase/approved?series=${request.seriesSlug}`,
   });
 
-  await sendPurchaseApprovedEmail({
-    to: request.email,
-    username: request.username,
-    seriesName: request.seriesTitle,
-    purchaseDate: new Date(request.createdAt),
-    approvalDate: new Date(request.reviewedAt ?? Date.now()),
-  });
+  try {
+    await sendPurchaseApprovedEmail({
+      to: request.email,
+      username: request.username,
+      seriesName: request.seriesTitle,
+      purchaseDate: new Date(request.createdAt),
+      approvalDate: new Date(request.reviewedAt ?? Date.now()),
+    });
+  } catch (e) {
+    console.error("[MirAi] purchase approval email failed:", e);
+  }
 
   return request;
 }

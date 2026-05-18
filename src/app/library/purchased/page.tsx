@@ -6,10 +6,11 @@ export const metadata = {
   title: "Đã mua",
 };
 
-export default function PurchasedPage() {
+export default async function PurchasedPage() {
+  const seriesCatalog = await getAllSeries();
   return (
     <PageShell maxWidth="catalog" className="pb-24 md:pb-8">
-      <PurchasedPageView seriesCatalog={getAllSeries()} />
+      <PurchasedPageView seriesCatalog={seriesCatalog} />
     </PageShell>
   );
 }

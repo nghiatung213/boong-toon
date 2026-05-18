@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: RouteParams) {
   const auth = requireAdmin(request);
   if (auth) return auth;
   const { id } = await params;
-  return jsonOk({ chapters: getChaptersForSeriesId(id) });
+  return jsonOk({ chapters: await getChaptersForSeriesId(id) });
 }
 
 export async function POST(request: Request, { params }: RouteParams) {
@@ -29,7 +29,7 @@ export async function POST(request: Request, { params }: RouteParams) {
     if (!body.content?.trim()) {
       return jsonError("Nội dung chương là bắt buộc");
     }
-    const chapter = createChapter(id, body);
+    const chapter = await createChapter(id, body);
     return jsonOk({ chapter }, 201);
   } catch (e) {
     return jsonError(e instanceof Error ? e.message : "Lỗi tạo chương");

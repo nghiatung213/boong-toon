@@ -3,9 +3,9 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { listSeriesWithStats } from "@/lib/admin/series-service";
 import { getGenres } from "@/lib/data/repository/catalog-repository";
 
-export default function AdminDashboardPage() {
-  const series = listSeriesWithStats();
-  const genres = getGenres();
+export default async function AdminDashboardPage() {
+  const series = await listSeriesWithStats();
+  const genres = await getGenres();
   const totalChapters = series.reduce((n, s) => n + s.chapterCount, 0);
   const lockedChapters = series.reduce((n, s) => n + s.lockedCount, 0);
 

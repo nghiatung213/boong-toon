@@ -8,7 +8,7 @@ interface PurchasePageProps {
 
 export default async function PurchasePage({ params }: PurchasePageProps) {
   const { slug } = await params;
-  const series = getSeriesBySlug(slug);
+  const series = await getSeriesBySlug(slug);
   if (!series) notFound();
   return <PurchaseClient series={series} />;
 }

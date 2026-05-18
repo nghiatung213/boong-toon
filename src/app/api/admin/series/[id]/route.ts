@@ -18,12 +18,12 @@ export async function GET(request: Request, { params }: RouteParams) {
   if (auth) return auth;
 
   const { id } = await params;
-  const series = getSeriesById(id);
+  const series = await getSeriesById(id);
   if (!series) return jsonError("Không tìm thấy truyện", 404);
 
   return jsonOk({
     series,
-    chapters: getChaptersForSeriesId(id),
+    chapters: await getChaptersForSeriesId(id),
   });
 }
 
@@ -34,7 +34,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   try {
     const { id } = await params;
     const body = (await request.json()) as Partial<SeriesInput>;
-    const series = updateSeries(id, body);
+    const series = await updateSeries(id, body);
     return jsonOk({ series });
   } catch (e) {
     return jsonError(e instanceof Error ? e.message : "Lỗi cập nhật");
@@ -47,7 +47,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
 
   try {
     const { id } = await params;
-    removeSeries(id);
+    await removeSeries(id);
     return jsonOk({ ok: true });
   } catch (e) {
     return jsonError(e instanceof Error ? e.message : "Lỗi xóa");

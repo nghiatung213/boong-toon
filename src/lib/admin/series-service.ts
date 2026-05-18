@@ -10,7 +10,6 @@ import {
   deleteSeriesChapters,
   getChaptersForSeriesId,
   upsertChapter,
-  writeChapterContent,
 } from "@/lib/data/repository/chapter-repository";
 import type { ChapterRecord } from "@/lib/types/catalog";
 import type { Series, SeriesStatus, SeriesType } from "@/lib/types/series";
@@ -37,21 +36,24 @@ export interface ChapterInput {
   order?: number;
 }
 
-export function listSeriesWithStats() {
-  const catalog = loadCatalog();
-  return catalog.series.map((series) => {
-    const chapters = getChaptersForSeriesId(series.id);
-    return {
-      ...series,
-      chapterCount: chapters.length,
-      lockedCount: chapters.filter((c) => c.isLocked).length,
-    };
-  });
+export async function listSeriesWithStats() {
+  const catalog = await loadCatalog();
+  return Promise.all(
+    catalog.series.map(async (series) => {
+      const chapters = await getChaptersForSeriesId(series.id);
+      return {
+        ...series,
+        chapterCount: chapters.length,
+        lockedCount: chapters.filter((c) => c.isLocked).length,
+      };
+    }),
+  );
 }
 
-export function createSeries(input: SeriesInput): Series {
+export async function createSeries(input: SeriesInput): Promise<Series> {
   const id = generateId("series");
-  const slug = input.slug?.trim() || slugify(input.title) || id;
+  const slug =
+    slugify(input.slug?.trim() ?? "") || slugify(input.title) || id;
   const series: Series = {
     id,
     slug,
@@ -68,8 +70,11 @@ export function createSeries(input: SeriesInput): Series {
   return upsertSeries(series);
 }
 
-export function updateSeries(id: string, input: Partial<SeriesInput>): Series {
-  const existing = getSeriesById(id);
+export async function updateSeries(
+  id: string,
+  input: Partial<SeriesInput>,
+): Promise<Series> {
+  const existing = await getSeriesById(id);
   if (!existing) {
     throw new Error("Series not found");
   }
@@ -77,7 +82,9 @@ export function updateSeries(id: string, input: Partial<SeriesInput>): Series {
   const series: Series = {
     ...existing,
     title: input.title?.trim() ?? existing.title,
-    slug: input.slug?.trim() || existing.slug,
+    slug: input.slug?.trim()
+      ? slugify(input.slug.trim()) || existing.slug
+      : existing.slug,
     type: input.type ?? existing.type,
     synopsis: input.synopsis?.trim() ?? existing.synopsis,
     coverUrl: input.coverUrl?.trim() ?? existing.coverUrl,
@@ -102,21 +109,21 @@ function normalizePrice(price: number | undefined, isPremium: boolean): number {
   return isPremium ? 49_000 : 0;
 }
 
-export function removeSeries(id: string): void {
-  deleteSeriesChapters(id);
-  deleteSeries(id);
+export async function removeSeries(id: string): Promise<void> {
+  await deleteSeriesChapters(id);
+  await deleteSeries(id);
 }
 
-export function createChapter(
+export async function createChapter(
   seriesId: string,
   input: ChapterInput,
-): ChapterRecord {
-  const chapters = getChaptersForSeriesId(seriesId);
+): Promise<ChapterRecord> {
+  const chapters = await getChaptersForSeriesId(seriesId);
   const id = generateId("chap");
   const order =
     typeof input.order === "number" ? input.order : chapters.length;
 
-  const file = writeChapterContent(seriesId, id, input.content);
+  const file = `content/${seriesId}/${id}.md`;
 
   const record: ChapterRecord = {
     id,
@@ -127,24 +134,24 @@ export function createChapter(
     timestamp: input.timestamp ?? undefined,
   };
 
-  return upsertChapter(seriesId, record);
+  return upsertChapter(seriesId, record, input.content);
 }
 
-export function updateChapter(
+export async function updateChapter(
   seriesId: string,
   chapterId: string,
   input: Partial<ChapterInput>,
-): ChapterRecord {
-  const chapters = getChaptersForSeriesId(seriesId);
+): Promise<ChapterRecord> {
+  const chapters = await getChaptersForSeriesId(seriesId);
   const existing = chapters.find((c) => c.id === chapterId);
   if (!existing) {
     throw new Error("Chapter not found");
   }
 
-  let file = existing.file;
-  if (typeof input.content === "string") {
-    file = writeChapterContent(seriesId, chapterId, input.content);
-  }
+  const file =
+    typeof input.content === "string"
+      ? `content/${seriesId}/${chapterId}.md`
+      : existing.file;
 
   const record: ChapterRecord = {
     id: chapterId,
@@ -158,5 +165,9 @@ export function updateChapter(
         : (input.timestamp ?? existing.timestamp),
   };
 
-  return upsertChapter(seriesId, record);
+  return upsertChapter(
+    seriesId,
+    record,
+    typeof input.content === "string" ? input.content : undefined,
+  );
 }

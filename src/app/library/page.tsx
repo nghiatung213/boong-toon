@@ -6,10 +6,11 @@ export const metadata = {
   title: "Thư viện",
 };
 
-export default function LibraryPage() {
+export default async function LibraryPage() {
+  const seriesCatalog = await getAllSeries();
   return (
     <PageShell className="pb-24 md:pb-8">
-      <LibraryPageView seriesCatalog={getAllSeries()} />
+      <LibraryPageView seriesCatalog={seriesCatalog} />
     </PageShell>
   );
 }

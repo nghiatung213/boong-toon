@@ -63,8 +63,8 @@ export function PurchaseClient({ series }: PurchaseClientProps) {
         body: JSON.stringify({ seriesSlug: series.slug }),
       });
       if (!res.ok) {
-        const d = (await res.json()) as { error?: string };
-        throw new Error(d.error);
+        const d = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(d.error ?? "Không tạo được yêu cầu mua");
       }
       await refresh();
       setDone(true);

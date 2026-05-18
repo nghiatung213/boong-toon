@@ -1,5 +1,7 @@
 import { readChapterContentByFile } from "@/lib/data/repository/chapter-repository";
 
-export function readChapterMarkdown(relativeFile: string): string | null {
+export async function readChapterMarkdown(
+  relativeFile: string,
+): Promise<string | null> {
   return readChapterContentByFile(relativeFile);
 }

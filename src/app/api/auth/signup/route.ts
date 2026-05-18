@@ -35,7 +35,11 @@ export async function POST(request: Request) {
 
     if (signUpError || !user) return jsonError(signUpError ?? "Đăng ký thất bại");
 
-    await sendWelcomeEmail(user.email, user.username);
+    try {
+      await sendWelcomeEmail(user.email, user.username);
+    } catch (e) {
+      console.error("[MirAi] welcome email failed:", e);
+    }
 
     await createNotification({
       userId: user.id,

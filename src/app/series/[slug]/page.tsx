@@ -14,7 +14,7 @@ interface SeriesPageProps {
 
 export async function generateMetadata({ params }: SeriesPageProps) {
   const { slug } = await params;
-  const series = getSeriesBySlug(slug);
+  const series = await getSeriesBySlug(slug);
   if (!series) return { title: "Không tìm thấy" };
   return {
     title: series.title,
@@ -24,14 +24,14 @@ export async function generateMetadata({ params }: SeriesPageProps) {
 
 export default async function SeriesPage({ params }: SeriesPageProps) {
   const { slug } = await params;
-  const series = getSeriesBySlug(slug);
+  const series = await getSeriesBySlug(slug);
 
   if (!series) {
     notFound();
   }
 
-  const chapters = getPublishedChapters(series.id);
-  const allChapters = getChaptersForSeries(series.id);
+  const chapters = await getPublishedChapters(series.id);
+  const allChapters = await getChaptersForSeries(series.id);
   const firstChapter = chapters[0] ?? null;
   const publishedChapterIds = chapters.map((c) => c.id);
   const allChapterIds = allChapters.map((c) => c.id);

@@ -16,7 +16,12 @@ export async function POST(request: Request, { params }: Params) {
     adminNote?: string;
   };
 
-  const result = await handlePurchaseRejection(id, body.adminNote);
-  if (!result) return jsonError("Không tìm thấy yêu cầu", 404);
-  return jsonOk({ purchase: result });
+  try {
+    const result = await handlePurchaseRejection(id, body.adminNote);
+    if (!result) return jsonError("Không tìm thấy yêu cầu", 404);
+    return jsonOk({ purchase: result });
+  } catch (e) {
+    console.error("[MirAi] reject purchase", e);
+    return jsonError(e instanceof Error ? e.message : "Từ chối thất bại", 500);
+  }
 }

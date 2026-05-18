@@ -15,21 +15,26 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const user = await getSessionUserFromRequest(request);
-  if (!user) return jsonError("Đăng nhập để mua truyện", 401);
+  try {
+    const user = await getSessionUserFromRequest(request);
+    if (!user) return jsonError("Đăng nhập để mua truyện", 401);
 
-  const body = (await request.json()) as { seriesSlug?: string };
-  const series = getSeriesBySlugFromStore(body.seriesSlug ?? "");
-  if (!series) return jsonError("Không tìm thấy truyện");
+    const body = (await request.json()) as { seriesSlug?: string };
+    const series = await getSeriesBySlugFromStore(body.seriesSlug ?? "");
+    if (!series) return jsonError("Không tìm thấy truyện");
 
-  const purchase = await createPurchaseRequest({
-    userId: user.id,
-    username: user.username,
-    email: user.email,
-    seriesId: series.id,
-    seriesSlug: series.slug,
-    seriesTitle: series.title,
-  });
+    const purchase = await createPurchaseRequest({
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      seriesId: series.id,
+      seriesSlug: series.slug,
+      seriesTitle: series.title,
+    });
 
-  return jsonOk({ purchase }, 201);
+    return jsonOk({ purchase }, 201);
+  } catch (e) {
+    console.error("[MirAi] POST /api/purchases", e);
+    return jsonError(e instanceof Error ? e.message : "Lỗi tạo yêu cầu mua", 500);
+  }
 }

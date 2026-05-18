@@ -39,6 +39,21 @@
       "tagline": "?",
       "isPremium": true,
       "price": 5000
+    },
+    {
+      "id": "series_1779112850226",
+      "slug": "truyen-1",
+      "title": "Truyện 1",
+      "type": "novel",
+      "synopsis": "",
+      "coverUrl": "https://jvjzkbdedkpzaqooakor.supabase.co/storage/v1/object/public/covers/cover_1779112841898.png",
+      "genres": [
+        "Sci-fi",
+        "Lãng mạn"
+      ],
+      "status": "ongoing",
+      "isPremium": false,
+      "price": 0
     }
   ]
 }

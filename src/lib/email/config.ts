@@ -10,8 +10,11 @@ export const emailConfig = {
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
     "http://localhost:3000",
   resendApiKey: process.env.RESEND_API_KEY,
-  /** When true, also writes to data/email-outbox.json for audit/debug */
-  logToOutbox: process.env.EMAIL_LOG_OUTBOX !== "false",
+  /** Local dev only — Vercel filesystem is read-only */
+  logToOutbox:
+    process.env.EMAIL_LOG_OUTBOX === "true" &&
+    process.env.NODE_ENV !== "production" &&
+    !process.env.VERCEL,
 } as const;
 
 export function isEmailLive(): boolean {

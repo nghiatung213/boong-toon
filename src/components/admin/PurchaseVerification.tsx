@@ -21,8 +21,14 @@ export function PurchaseVerification() {
     if (filterSeries) params.set("seriesSlug", filterSeries);
     if (filterUser) params.set("username", filterUser);
     const res = await fetch(`/api/admin/purchases?${params}`);
-    const data = (await res.json()) as { purchases: PurchaseRequest[] };
-    setItems(data.purchases);
+    const data = (await res.json().catch(() => ({}))) as {
+      purchases?: PurchaseRequest[];
+      error?: string;
+    };
+    if (!res.ok) {
+      throw new Error(data.error ?? "Không tải được danh sách");
+    }
+    setItems(data.purchases ?? []);
     setLoading(false);
   }, [filterStatus, filterSeries, filterUser]);
 
@@ -35,11 +41,16 @@ export function PurchaseVerification() {
       action === "reject"
         ? prompt("Lý do từ chối (tuỳ chọn):") ?? undefined
         : undefined;
-    await fetch(`/api/admin/purchases/${id}/${action}`, {
+    const res = await fetch(`/api/admin/purchases/${id}/${action}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ adminNote: note }),
     });
+    const data = (await res.json().catch(() => ({}))) as { error?: string };
+    if (!res.ok) {
+      alert(data.error ?? "Thao tác thất bại");
+      return;
+    }
     void load();
   };
 

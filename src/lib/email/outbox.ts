@@ -30,6 +30,11 @@ export function logEmailToOutbox(input: SendEmailInput): EmailOutboxEntry {
     html: input.html,
     createdAt: Date.now(),
   };
+
+  if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
+    return entry;
+  }
+
   const items = readOutbox();
   items.unshift(entry);
   writeOutbox(items.slice(0, 200));

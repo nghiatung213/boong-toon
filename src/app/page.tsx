@@ -7,8 +7,8 @@ import { SeriesGrid } from "@/components/home/SeriesGrid";
 import { PageShell } from "@/components/layout/PageShell";
 import { getAllSeries } from "@/lib/data/catalog";
 
-export default function HomePage() {
-  const seriesList = getAllSeries();
+export default async function HomePage() {
+  const seriesList = await getAllSeries();
 
   return (
     <PageShell className="pb-24 md:pb-8">

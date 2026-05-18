@@ -10,7 +10,7 @@ import type { SeriesInput } from "@/lib/admin/series-service";
 export async function GET(request: Request) {
   const auth = requireAdmin(request);
   if (auth) return auth;
-  return jsonOk({ series: listSeriesWithStats() });
+  return jsonOk({ series: await listSeriesWithStats() });
 }
 
 export async function POST(request: Request) {
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     if (!body.title?.trim()) {
       return jsonError("Tiêu đề là bắt buộc");
     }
-    const series = createSeries(body);
+    const series = await createSeries(body);
     return jsonOk({ series }, 201);
   } catch (e) {
     return jsonError(e instanceof Error ? e.message : "Lỗi tạo truyện");

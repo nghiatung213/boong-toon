@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { ReaderGate } from "@/components/reader/ReaderGate";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { Button } from "@/components/ui/Button";
 import { PageShell } from "@/components/layout/PageShell";
 import {
   getAdjacentChapters,
@@ -15,31 +17,40 @@ interface ReadPageProps {
 
 export async function generateMetadata({ params }: ReadPageProps) {
   const { slug, chapterId } = await params;
-  const chapter = getChapterById(slug, chapterId);
-  const series = getSeriesBySlug(slug);
+  const chapter = await getChapterById(slug, chapterId);
+  const series = await getSeriesBySlug(slug);
   if (!chapter || !series) return { title: "Đọc truyện" };
   return { title: `${chapter.title} — ${series.title}` };
 }
 
 export default async function ReadPage({ params }: ReadPageProps) {
   const { slug, chapterId } = await params;
-  const series = getSeriesBySlug(slug);
-  const chapter = getChapterById(slug, chapterId);
+  const series = await getSeriesBySlug(slug);
+  const chapter = await getChapterById(slug, chapterId);
 
   if (!series || !chapter) {
     notFound();
   }
 
   if (!isChapterPublished(chapter)) {
-    notFound();
+    return (
+      <PageShell maxWidth="reader">
+        <GlassCard className="text-center">
+          <p className="text-lg font-bold">Chương chưa được phát hành</p>
+          <p className="mt-2 text-sm opacity-80">
+            Chương này được hẹn giờ đăng. Vui lòng quay lại sau.
+          </p>
+          <Button href={`/series/${slug}`} variant="outline" className="mt-4">
+            Về trang truyện
+          </Button>
+        </GlassCard>
+      </PageShell>
+    );
   }
 
-  const markdown = readChapterMarkdown(chapter.file);
-  if (markdown === null) {
-    notFound();
-  }
+  const markdown = (await readChapterMarkdown(chapter.file)) ?? "";
 
-  const { prev, next } = getAdjacentChapters(slug, chapterId);
+  const { prev, next } = await getAdjacentChapters(slug, chapterId);
 
   return (
     <PageShell maxWidth="reader" className="pb-0 md:pb-8">

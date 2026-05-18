@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
 import { getAllSeries } from "@/lib/data/catalog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
     "http://localhost:3000";
 
-  const series = getAllSeries();
+  const series = await getAllSeries();
 
   return [
     {

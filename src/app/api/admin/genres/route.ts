@@ -11,7 +11,7 @@ import {
 export async function GET(request: Request) {
   const auth = requireAdmin(request);
   if (auth) return auth;
-  return jsonOk({ genres: getGenres() });
+  return jsonOk({ genres: await getGenres() });
 }
 
 export async function PUT(request: Request) {
@@ -29,14 +29,14 @@ export async function PUT(request: Request) {
     ),
   ];
 
-  saveGenres(cleaned);
+  await saveGenres(cleaned);
 
-  const catalog = loadCatalog();
+  const catalog = await loadCatalog();
   catalog.series = catalog.series.map((series) => ({
     ...series,
     genres: series.genres.filter((g) => cleaned.includes(g)),
   }));
-  saveCatalog(catalog);
+  await saveCatalog(catalog);
 
   return jsonOk({ genres: cleaned });
 }
