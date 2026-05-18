@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Merriweather, Nunito } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ServiceWorkerRegister } from "@/components/pwa/ServiceWorkerRegister";
@@ -86,6 +87,7 @@ export default function RootLayout({
           <ServiceWorkerRegister />
           <SiteChrome>{children}</SiteChrome>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
