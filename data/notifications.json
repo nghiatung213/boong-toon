@@ -1,0 +1,52 @@
+[
+  {
+    "id": "notif_1779040464921",
+    "userId": "user_1779040464819",
+    "type": "welcome",
+    "title": "Chào mừng đến MirAi",
+    "message": "Đăng ký thành công. Thông báo xác minh mua truyện sẽ được gửi qua email.",
+    "href": "/profile",
+    "read": false,
+    "createdAt": 1779040464921
+  },
+  {
+    "id": "notif_1779041002799",
+    "userId": "user_1779040464819",
+    "type": "purchase_rejected",
+    "title": "Xác minh thất bại",
+    "message": "chưa ck, hô hô",
+    "href": "/series/mirai/purchase",
+    "read": false,
+    "createdAt": 1779041002799
+  },
+  {
+    "id": "notif_1779041193856",
+    "userId": "user_1779040464819",
+    "type": "purchase_approved",
+    "title": "Mua truyện thành công",
+    "message": "Bạn đã sở hữu \"MirAi Project\" — trọn bộ + chương tương lai.",
+    "href": "/purchase/approved?series=mirai",
+    "read": true,
+    "createdAt": 1779041193856
+  },
+  {
+    "id": "notif_1779041193869",
+    "userId": "user_1779040464819",
+    "type": "purchase_approved",
+    "title": "Mua truyện thành công",
+    "message": "Bạn đã sở hữu \"MirAi Project\" — trọn bộ + chương tương lai.",
+    "href": "/purchase/approved?series=mirai",
+    "read": false,
+    "createdAt": 1779041193869
+  },
+  {
+    "id": "notif_1779042127013",
+    "userId": "user_1779042126911",
+    "type": "welcome",
+    "title": "Chào mừng đến MirAi",
+    "message": "Đăng ký thành công. Thông báo xác minh mua truyện sẽ được gửi qua email.",
+    "href": "/profile",
+    "read": true,
+    "createdAt": 1779042127013
+  }
+]

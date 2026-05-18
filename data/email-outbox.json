@@ -1,0 +1,34 @@
+[
+  {
+    "id": "email_1779042127006",
+    "to": "tungnghia99@gmail.com",
+    "subject": "Chào mừng đến MirAi Project",
+    "template": "welcome",
+    "html": "<!DOCTYPE html><html><body style=\"font-family:sans-serif;background:#0f0f12;color:#dfe4ea;padding:24px\"><div style=\"max-width:520px;margin:0 auto;background:rgba(30,30,30,.95);border-radius:16px;padding:28px;border:1px solid rgba(255,107,129,.3)\">\n      <h1 style=\"color:#ff6b81\">Chào tungtest02!</h1>\n      <p>Đăng ký thành công. Từ nay, mọi thông báo xác minh mua truyện sẽ được gửi qua email này.</p>\n    </div></body></html>",
+    "createdAt": 1779042127006
+  },
+  {
+    "id": "email_1779041193870",
+    "to": "tungnghia48@gmail.com",
+    "subject": "Đã mở khóa: MirAi Project",
+    "template": "purchase_approved",
+    "html": "<!DOCTYPE html><html><body style=\"font-family:sans-serif;background:#0f0f12;color:#dfe4ea;padding:24px\"><div style=\"max-width:520px;margin:0 auto;background:rgba(30,30,30,.95);border-radius:16px;padding:28px;border:1px solid rgba(255,107,129,.3)\">\n      <h1 style=\"color:#ff6b81\">Mua truyện thành công</h1>\n      <p>Xin chào <strong>tungtest01</strong>,</p>\n      <p>Admin đã xác minh thanh toán. Bạn đã sở hữu trọn bộ <strong>MirAi Project</strong> — bao gồm mọi chương hiện tại và tương lai.</p>\n      <p><a href=\"/library/purchased\" style=\"color:#a29bfe\">Mở thư viện đã mua →</a></p>\n    </div></body></html>",
+    "createdAt": 1779041193870
+  },
+  {
+    "id": "email_1779041193858",
+    "to": "tungnghia48@gmail.com",
+    "subject": "Đã mở khóa: MirAi Project",
+    "template": "purchase_approved",
+    "html": "<!DOCTYPE html><html><body style=\"font-family:sans-serif;background:#0f0f12;color:#dfe4ea;padding:24px\"><div style=\"max-width:520px;margin:0 auto;background:rgba(30,30,30,.95);border-radius:16px;padding:28px;border:1px solid rgba(255,107,129,.3)\">\n      <h1 style=\"color:#ff6b81\">Mua truyện thành công</h1>\n      <p>Xin chào <strong>tungtest01</strong>,</p>\n      <p>Admin đã xác minh thanh toán. Bạn đã sở hữu trọn bộ <strong>MirAi Project</strong> — bao gồm mọi chương hiện tại và tương lai.</p>\n      <p><a href=\"/library/purchased\" style=\"color:#a29bfe\">Mở thư viện đã mua →</a></p>\n    </div></body></html>",
+    "createdAt": 1779041193858
+  },
+  {
+    "id": "email_1779040464917",
+    "to": "tungnghia48@gmail.com",
+    "subject": "Chào mừng đến MirAi Project",
+    "template": "welcome",
+    "html": "<!DOCTYPE html><html><body style=\"font-family:sans-serif;background:#0f0f12;color:#dfe4ea;padding:24px\"><div style=\"max-width:520px;margin:0 auto;background:rgba(30,30,30,.95);border-radius:16px;padding:28px;border:1px solid rgba(255,107,129,.3)\">\n      <h1 style=\"color:#ff6b81\">Chào tungtest01!</h1>\n      <p>Đăng ký thành công. Từ nay, mọi thông báo xác minh mua truyện sẽ được gửi qua email này.</p>\n    </div></body></html>",
+    "createdAt": 1779040464917
+  }
+]

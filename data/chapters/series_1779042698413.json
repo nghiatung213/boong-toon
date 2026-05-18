@@ -1,0 +1,24 @@
+[
+  {
+    "id": "chap_1779042733105",
+    "title": "Giới thiệu",
+    "file": "content/series_1779042698413/chap_1779042733105.md",
+    "order": 0,
+    "isLocked": false
+  },
+  {
+    "id": "chap_1779042742239",
+    "title": "Chương 1",
+    "file": "content/series_1779042698413/chap_1779042742239.md",
+    "order": 1,
+    "isLocked": true
+  },
+  {
+    "id": "chap_1779042769884",
+    "title": "Chương 2 - auto post test",
+    "file": "content/series_1779042698413/chap_1779042769884.md",
+    "order": 2,
+    "isLocked": false,
+    "timestamp": 1779099600000
+  }
+]

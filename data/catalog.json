@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "genres": [
+    "Sci-fi",
+    "Lãng mạn",
+    "Tâm lý",
+    "Hành động"
+  ],
+  "series": [
+    {
+      "id": "mirai",
+      "slug": "mirai",
+      "title": "MirAi Project",
+      "type": "novel",
+      "tagline": "Namutachi",
+      "synopsis": "MirAi là câu chuyện lãng mạn, tâm lý trong bối cảnh khoa học viễn tưởng, xoay quanh Minh — một sinh viên tự ti và hành trình bước ra khỏi vỏ bọc vì tình yêu với Vy.",
+      "coverUrl": "https://raw.githubusercontent.com/namutachi-webtachi/MirAi-project-/main/images/demo_thumbnail.png",
+      "genres": [
+        "Sci-fi",
+        "Lãng mạn",
+        "Tâm lý"
+      ],
+      "status": "completed",
+      "isPremium": true,
+      "price": 49000
+    },
+    {
+      "id": "series_1779042698413",
+      "slug": "Truyen-02",
+      "title": "Truyện 02",
+      "type": "novel",
+      "synopsis": "abc",
+      "coverUrl": "https://raw.githubusercontent.com/namutachi-webtachi/MirAi-project-/main/images/demo_thumbnail.png",
+      "genres": [
+        "Hành động",
+        "Sci-fi"
+      ],
+      "status": "ongoing",
+      "tagline": "?",
+      "isPremium": true,
+      "price": 5000
+    }
+  ]
+}

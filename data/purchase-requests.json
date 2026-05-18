@@ -1,0 +1,29 @@
+[
+  {
+    "id": "pur_1779040658332",
+    "userId": "user_1779040464819",
+    "username": "tungtest01",
+    "email": "tungnghia48@gmail.com",
+    "seriesId": "mirai",
+    "seriesSlug": "mirai",
+    "seriesTitle": "MirAi Project",
+    "transferNote": "tungtest01 + MirAi Project",
+    "status": "rejected",
+    "createdAt": 1779040658332,
+    "reviewedAt": 1779041002797,
+    "adminNote": "chưa ck, hô hô"
+  },
+  {
+    "id": "pur_1779041176363",
+    "userId": "user_1779040464819",
+    "username": "tungtest01",
+    "email": "tungnghia48@gmail.com",
+    "seriesId": "mirai",
+    "seriesSlug": "mirai",
+    "seriesTitle": "MirAi Project",
+    "transferNote": "tungtest01 + MirAi Project",
+    "status": "approved",
+    "createdAt": 1779041176363,
+    "reviewedAt": 1779041193864
+  }
+]

@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MirAi Reader (Next.js)
 
-## Getting Started
+Modern reader UI for MirAi — runs alongside the legacy static site in the parent folder.
 
-First, run the development server:
+## Requirements
+
+- Node.js **18.18+** (recommended 20+)
+
+## Run locally
 
 ```bash
+cd web
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Chapter markdown is read from `../chapters/` (repo root).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Routes
 
-## Learn More
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage — continue reading, favorites, purchased preview |
+| `/library` | Full library (favorites + continue) |
+| `/library/purchased` | Purchased stories (localStorage demo) |
+| `/library/history` | Reading history |
+| `/series/mirai` | Story detail + chapter list with progress |
+| `/series/mirai/read/[chapterId]` | Immersive reader |
+| `/admin` | Solo admin dashboard (password protected) |
+| `/admin/series` | CRUD series + chapters |
+| `/admin/genres` | Manage genre tags |
 
-To learn more about Next.js, take a look at the following resources:
+### Admin login
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Default password: `mirai-studio` (override with `ADMIN_PASSWORD` in `.env.local`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Data is stored in `web/data/` as JSON + markdown (auto-seeded from legacy `mirai-chapters.json` on first run).
 
-## Deploy on Vercel
+## Local storage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All reader data is stored under `mirai_library` in localStorage:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Continue reading + scroll progress %
+- Favorites (series slugs)
+- Purchased series/chapters (demo, no real payment)
+- Reading history (last 50 entries)
+
+Legacy keys (`mirai_bookmark`, `mirai_continue_*`, `mirai_pos_*`) are synced automatically.
+
+## Build
+
+```bash
+npm run build
+npm start
+```

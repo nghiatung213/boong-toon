@@ -1,0 +1,30 @@
+[
+  {
+    "id": "user_1779040464819",
+    "username": "tungtest01",
+    "email": "tungnghia48@gmail.com",
+    "passwordHash": "7650b82f93c771a555a6540ca7a63c87:2c67c0bf32f74a54a3ebbe413713ad4623f26263689f7110a09b114bc1d6d4d659846f5cb6fc2802a3e005ac5b3e0e292528830f8914e7ee038a70ff2ff1d92f",
+    "createdAt": 1779040464915
+  },
+  {
+    "id": "user_1779042126911",
+    "username": "tungtest02",
+    "email": "tungnghia99@gmail.com",
+    "passwordHash": "357c828ae1961f19bad420ddd16fc315:e9e49208d0537d7b93920fc9b712c5d334bbec96c4f9f5f2b8c136c3352eb8eb91df063e7ed7d709510ecfe4358720ff881a36da6ab152c08ec7b52c95cd0595",
+    "createdAt": 1779042127001
+  },
+  {
+    "id": "user_1779056207221",
+    "username": "tungtest03",
+    "email": "tungharry2103@gmail.com",
+    "passwordHash": "1c8905c2927ed749e93675080d4a9cf1:d7a39f296858eda94654db6c97dbae66021057c06bba760a65677c84658fbe76f47ff14ea5c0942aae076c51771942ee6c2d070cc8c5f0e7457cb7385b65ae0d",
+    "createdAt": 1779056207320
+  },
+  {
+    "id": "user_1779056338422",
+    "username": "tungtest003",
+    "email": "tungnghia8@gmail.com",
+    "passwordHash": "248375bafa906ace2e33740bf5a9638b:1e4daa07fd4949c1d753f285754d7c4c2b14e85b16385a0ab91aa3899f35d8144054e321682557f4e9f4a29af229913d3bc5ddc6eb0e8208ac65ef6787d479db",
+    "createdAt": 1779056338512
+  }
+]

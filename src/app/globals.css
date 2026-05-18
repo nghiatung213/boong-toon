@@ -1,26 +1,215 @@
 @import "tailwindcss";
 
+/* MirAi design tokens — ported from css/style.css */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #ff6b81;
+  --accent: #a29bfe;
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --text: #2d3436;
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --surface: #f1f2f6;
+  --chap-card-bg: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] {
+  --primary: #ff4757;
+  --accent: #70a1ff;
+  --glass: rgba(30, 30, 30, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text: #dfe4ea;
+  --surface: #0f0f12;
+  --chap-card-bg: rgba(0, 0, 0, 0.3);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-mirai-text: var(--text);
+  --color-surface: var(--surface);
+  --font-sans: var(--font-nunito);
+  --font-serif: var(--font-merriweather);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen antialiased;
+    font-family: var(--font-nunito), "Nunito", sans-serif;
+    color: var(--text);
+    background-color: var(--surface);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .glass-box {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  .gradient-title {
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.tagline {
+  text-align: center;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reader prose */
+.reader-content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.reader-content.font-serif {
+  font-family: var(--font-merriweather), "Merriweather", serif;
+}
+
+.reader-content img {
+  max-width: 100%;
+  border-radius: 10px;
+  display: block;
+  margin: 15px auto;
+  box-shadow: var(--shadow);
+}
+
+.reader-content h1,
+.reader-content h2,
+.reader-content h3 {
+  color: var(--primary);
+  margin-top: 1.5em;
+}
+
+.reader-content a {
+  color: var(--accent);
+}
+
+.reader-content blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  opacity: 0.9;
+}
+
+/* Focus mode (reader immersion) */
+body.reader-focus .site-chrome {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body.reader-focus .reader-content-card {
+  margin-top: 0;
+}
+
+body.reader-focus .reader-mobile-nav {
+  opacity: 0.15;
+}
+
+body.reader-focus .reader-mobile-nav:hover {
+  opacity: 1;
+}
+
+/* Notification panel — safe area on notched phones */
+@media (max-width: 639px) {
+  [data-notification-panel] {
+    right: max(0.5rem, env(safe-area-inset-right, 0.5rem)) !important;
+    max-width: calc(100vw - max(1rem, env(safe-area-inset-right, 0.5rem) * 2)) !important;
+  }
+}
+
+/* Reader-only color themes (isolated from site theme) */
+.reader-shell[data-reader-theme="sepia"] .reader-content-card,
+.reader-shell[data-reader-theme="sepia"] .reader-controls {
+  --reader-bg: #f4ecd8;
+  --reader-text: #5c4b37;
+  --reader-heading: #8b5a2b;
+  --reader-border: rgba(92, 75, 55, 0.2);
+  background: var(--reader-bg) !important;
+  color: var(--reader-text);
+  border-color: var(--reader-border);
+}
+
+.reader-shell[data-reader-theme="sepia"] .reader-content {
+  color: var(--reader-text);
+}
+
+.reader-shell[data-reader-theme="sepia"] .reader-content h1,
+.reader-shell[data-reader-theme="sepia"] .reader-content h2,
+.reader-shell[data-reader-theme="sepia"] .reader-content h3 {
+  color: var(--reader-heading);
+}
+
+.reader-shell[data-reader-theme="light"] .reader-content-card,
+.reader-shell[data-reader-theme="light"] .reader-controls {
+  --reader-bg: rgba(255, 255, 255, 0.95);
+  --reader-text: #2d3436;
+  --reader-heading: #ff6b81;
+  background: var(--reader-bg) !important;
+  color: var(--reader-text);
+}
+
+.reader-shell[data-reader-theme="light"] .reader-content {
+  color: var(--reader-text);
+}
+
+.reader-shell[data-reader-theme="dark"] .reader-content-card,
+.reader-shell[data-reader-theme="dark"] .reader-controls {
+  --reader-bg: rgba(22, 22, 28, 0.98);
+  --reader-text: #dfe4ea;
+  --reader-heading: #ff4757;
+  background: var(--reader-bg) !important;
+  color: var(--reader-text);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.reader-shell[data-reader-theme="dark"] .reader-content {
+  color: var(--reader-text);
 }
