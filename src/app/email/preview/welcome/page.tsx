@@ -5,7 +5,7 @@ export default function WelcomeEmailPreviewPage() {
   return (
     <PageShell maxWidth="reader">
       <EmailLayout
-        title="Chào mừng đến MirAi!"
+        title="Chào mừng đến BoongToon!"
         ctaHref="/auth/login"
         ctaLabel="Đăng nhập"
       >
