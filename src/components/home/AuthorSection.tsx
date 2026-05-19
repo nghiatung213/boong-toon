@@ -25,20 +25,17 @@ export function AuthorSection() {
         </div>
 
         <div className="max-w-2xl text-center md:text-left">
-          <p className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
-            Tác giả
-          </p>
+          
           <h2 className="gradient-title mb-1 text-2xl font-bold sm:text-3xl">
-            Nguyễn Ngọc Quỳnh Trang
+          Nơi BoongTooon bắt đầu
           </h2>
-          <p className="mb-4 text-sm font-semibold italic text-[var(--primary)]">
-            Bút danh: Boongpanpan
-          </p>
+          
           <p className="leading-relaxed opacity-90">
-            Mình là người kể chuyện bằng cảm xúc — những câu chuyện lấy cảm hứng từ
-            giấc mơ, ký ức tuổi trẻ và những khoảnh khắc rất đời. MirAi ra đời
-            như một góc đọc riêng: nơi bạn có thể chậm lại, lắng nghe nhân vật
-            thở, và tìm thấy chút ấm áp giữa thế giới đầy ồn ào.
+          BoongToon.com — Gửi thời thanh xuân ấm áp của chúng ta. 
+          Giữa dòng đời vội vã, có những câu chuyện sinh ra là để sưởi ấm những tâm hồn cô độc. BoongToon tựa như một góc nhỏ bình yên, nơi thời gian ngừng lại bên hiên nhà đầy nắng, nơi khói trà vừa lên và những trang sách cổ bắt đầu lật mở.
+BoongToon ra đời không chỉ để mở ra một trang sách, mà là để tạo nên một trạm dừng chân giữa dòng chảy xiết của năm tháng. Nơi đây lưu giữ bóng hình chàng trai năm mười bảy tuổi đứng dưới vạt nắng sân trường, dệt nên những chấp niệm thanh xuân bỏ ngỏ; cũng là nơi chứng kiến những mối tình khắc cốt ghi tâm xuyên qua ngàn năm tuế nguyệt, những kiếp nhân sinh vương vấn chốn tiên hiền huyền ảo.
+Lật mở một chương truyện, khép lại những muộn phiền. Hãy để BoongToon đồng hành cùng bạn đi qua những đêm trường cô tịch, hong khô những tiếc nuối và tìm lại những rung động nguyên sơ nhất.
+Gặp gỡ tại BoongToon, thanh xuân là mãi mãi.
           </p>
           <p className="mt-3 text-sm italic opacity-70">
             Cảm ơn bạn đã ghé thăm — hy vọng mỗi chương truyện sẽ là một hành trình

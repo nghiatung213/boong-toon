@@ -13,11 +13,11 @@ export default async function HomePage() {
   return (
     <PageShell className="pb-24 md:pb-8">
       <HomeHero />
-      <AuthorSection />
+      <SeriesGrid series={seriesList} />
       <ContinueReadingSection seriesCatalog={seriesList} />
       <FavoritesSection seriesCatalog={seriesList} />
       <PurchasedPreview seriesCatalog={seriesList} />
-      <SeriesGrid series={seriesList} />
+      <AuthorSection />
     </PageShell>
   );
 }

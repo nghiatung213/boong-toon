@@ -1,6 +1,6 @@
 export const siteConfig = {
   webName: "Tiệm phim truyện của Boong",
-  subTitle: "🌙 Ở đây có phim hay, truyện cuốn và những đêm ngủ muộn. /n 🎬 Review phim • 🎧 Truyện audio • 🍿 Dịch phim cùng Boong 🐼",
+  subTitle: "🌙 Ở đây có vạt nắng năm mười bảy, những mối tình khắc cốt và những đêm ngủ muộn. 📖 Tiểu thuyết ngôn tình • 💫 Vũ trụ thanh xuân • � Cày truyện cùng Boong 🐼",
   tagline: "Tiệm phim truyện của Boong",
   themeColor: "#ff8996",
   bgImage:
