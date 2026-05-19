@@ -13,9 +13,9 @@ export function SiteHeader() {
     <header className="site-chrome mb-4">
       <nav className="glass-box flex flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link href="/" className="group">
-          <span className="gradient-title text-xl font-bold sm:text-2xl">
-            {siteConfig.webName}
-          </span>
+        <img
+      src="/images/BoongToon_Web_Logo.jpg" alt="BoongToon Logo" className="h-8 w-auto max-w-[150px] object-contain transition-transform group-hover:scale-105 sm:h-9 md:h-10" 
+  />
         </Link>
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <Link
